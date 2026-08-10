@@ -346,72 +346,37 @@
       border-radius: 2px;
     }
 
-    /* PORTOFOLIO GRID SECTION */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .portfolio-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      transition: var(--transition-smooth);
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--primary-cyan);
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
-    }
-
-    .portfolio-card i {
-      font-size: 2.5rem;
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-    }
-
-    .portfolio-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .portfolio-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .portfolio-card a {
-      color: var(--primary-cyan);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .portfolio-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* TENTANG SAYA SECTION */
+    /* TENTANG SAYA SECTION (DESAIN STANDAR & PROPORSIONAL) */
     .about-card {
       background: var(--bg-card);
       border-radius: 16px;
       padding: 2.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.2);
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 2rem;
+      grid-template-columns: 280px 1fr;
+      gap: 2.5rem;
       align-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .about-img-wrapper {
+      width: 100%;
+      height: 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
     }
 
     .about-img {
       width: 100%;
-      border-radius: 12px;
-      border: 2px solid var(--primary-cyan);
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+
+    .about-img-wrapper:hover .about-img {
+      transform: scale(1.05);
     }
 
     .about-info h3 {
@@ -424,6 +389,80 @@
       color: var(--text-muted);
       margin-bottom: 1.2rem;
       font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* PORTOFOLIO GRID SECTION WITH IMAGES */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary-cyan);
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+    }
+
+    .portfolio-card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    }
+
+    .portfolio-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .portfolio-card-body h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .portfolio-card-body h3 i {
+      color: var(--accent-gold);
+    }
+
+    .portfolio-card-body p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .portfolio-card-body a {
+      color: var(--primary-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .portfolio-card-body a:hover {
+      text-decoration: underline;
+      color: var(--accent-gold);
     }
 
     /* FORM KIRIM PESAN */
@@ -566,6 +605,10 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
+      .about-img-wrapper {
+        margin: 0 auto;
+        max-width: 280px;
+      }
       .btn-group, .social-links {
         justify-content: center;
       }
@@ -589,10 +632,11 @@
             <i class="fas fa-th-large"></i> Portofolio <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
           </button>
           <div class="dropdown-menu">
-            <a href="portofolio-1.html"><i class="fas fa-code"></i> (Web Dev)</a>
-            <a href="portofolio-2.html"><i class="fas fa-pen-nib"></i> (Publikasi)</a>
+            <a href="portofolio-1.html"><i class="fas fa-code"></i>  (Web Dev)</a>
+            <a href="portofolio-2.html"><i class="fas fa-pen-nib"></i>  (Publikasi)</a>
             <a href="portofolio-3.html"><i class="fas fa-microchip"></i> (Hardware)</a>
             <a href="portofolio-4.html"><i class="fas fa-tools"></i> (Skill)</a>
+            <a href="pengalaman.html"><i class="fas fa-history"></i> Pengalaman Kerja</a>
           </div>
         </div>
       </div>
@@ -601,7 +645,6 @@
         <li><a href="index.html" class="active">Beranda</a></li>
         <li><a href="tentang-saya.html">Tentang Saya</a></li>
         <li><a href="perpustakaan.html">Perpustakaan Digital</a></li>
-        <li><a href="pengalaman.html">Tentang Saya</a></li>
       </ul>
     </nav>
   </header>
@@ -612,7 +655,7 @@
     <div class="hero-container">
       <div class="hero-text">
         <h1>Halo, Saya <span>Dimas Julfiansyah</span></h1>
-        <p> Operasional IT, & Pengembangan Web .</p>
+        <p>Spesialis Operasional IT, Hardware & Pengembangan Web Terintegrasi.</p>
         
         <!-- QUOTES / KATA-KATA BIJAK -->
         <div class="hero-quote">
@@ -643,53 +686,63 @@
     </div>
   </section>
 
-  <!-- PORTOFOLIO UTAMA SECTION -->
+  <!-- TENTANG SAYA SECTION (DI ATAS SEBELUM PORTOFOLIO) -->
+  <section class="section" id="tentang">
+    <h2 class="section-title">Profil Tentang Saya</h2>
+    <div class="about-card">
+      <div class="about-img-wrapper">
+        <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Dimas Julfiansyah" class="about-img" onerror="this.src='https://via.placeholder.com/300x300/0284c7/ffffff?text=Profil'">
+      </div>
+      <div class="about-info">
+        <h3>Dimas Julfiansyah</h3>
+        <p>Saya adalah lulusan Teknik Komputer dan Informatika yang memiliki minat tinggi di bidang teknologi, pemeliharaan *hardware*, serta pengembangan perangkat lunak modern.</p>
+        <p>Dengan latar belakang teknis yang kuat, saya terbiasa menangani *troubleshooting* jaringan, perawatan mesin cetak digital, serta membangun antarmuka web yang responsif dan interaktif.</p>
+        <a href="tentang-saya.html" class="btn btn-primary" style="margin-top: 0.5rem;"><i class="fas fa-user"></i> Baca Selengkapnya</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTOFOLIO UTAMA SECTION (DENGAN TAMPILAN FOTO PADA CARD) -->
   <section class="section" id="portofolio">
     <h2 class="section-title">Bidang Portofolio Utama</h2>
     <div class="portfolio-grid">
       
       <div class="portfolio-card">
-        <i class="fas fa-laptop-code"></i>
-        <h3>Teknik Komputer & Informatika</h3>
-        <p>Pengembangan sistem web modern, *troubleshooting* software, dan pengelolaan infrastruktur IT dasar.</p>
-        <a href="portofolio-1.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Web Dev" class="portfolio-card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Web+Dev'">
+        <div class="portfolio-card-body">
+          <h3><i class="fas fa-laptop-code"></i> Programer IT dan web</h3>
+          <p>Pengembangan sistem web modern, troubleshooting software, dan pengelolaan infrastruktur IT dasar.</p>
+          <a href="portofolio-1.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
       <div class="portfolio-card">
-        <i class="fas fa-newspaper"></i>
-        <h3>Publikasi & Dokumen</h3>
-        <p>Pengelolaan dokumen teknis, publikasi karya cetak digital, serta penyusunan panduan operasional.</p>
-        <a href="portofolio-2.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Publikasi" class="portfolio-card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Publikasi'">
+        <div class="portfolio-card-body">
+          <h3><i class="fas fa-newspaper"></i> Publikasi Dokumen</h3>
+          <p>Pengelolaan dokumen teknis, publikasi karya cetak digital, serta penyusunan panduan operasional.</p>
+          <a href="portofolio-2.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
       <div class="portfolio-card">
-        <i class="fas fa-print"></i>
-        <h3>Teknik komputer dan informatika</h3>
-        <p>Pembuatan website yang terupdate</p>
-        <a href="portofolio-3.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Hardware" class="portfolio-card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Hardware'">
+        <div class="portfolio-card-body">
+          <h3><i class="fas fa-print"></i> Teknik komputer dan informatika</h3>
+          <p>Pemeliharaan hardware perangkat keras, penanganan error, dan penggantian spare part.</p>
+          <a href="portofolio-3.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
       <div class="portfolio-card">
-        <i class="fas fa-user-check"></i>
-        <h3>Pengalaman & Skill</h3>
-        <p> pengalaman kerja di dunia digital printing.</p>
-        <a href="portofolio-4.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Pengalaman" class="portfolio-card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Skill'">
+        <div class="portfolio-card-body">
+          <h3><i class="fas fa-user-check"></i> Pengalaman & Skill</h3>
+          <p> pengalaman kerja di dunia digital printing.</p>
+          <a href="portofolio-4.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- TENTANG SAYA SECTION -->
-  <section class="section" id="tentang">
-    <h2 class="section-title">Profil Tentang Saya</h2>
-    <div class="about-card">
-      <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Dimas Julfiansyah" class="about-img" onerror="this.src='https://via.placeholder.com/300x300/0284c7/ffffff?text=Profil'">
-      <div class="about-info">
-        <h3>Dimas Julfiansyah</h3>
-        <p>Saya adalah lulusan Teknik Komputer dan Informatika yang memiliki minat tinggi di bidang operasional industri, pemeliharaan *hardware*, serta pengembangan perangkat lunak modern.</p>
-        <p>Dengan latar belakang teknis yang kuat, saya terbiasa menangani *troubleshooting* jaringan, perawatan mesin cetak digital, serta membangun antarmuka web yang responsif dan interaktif.</p>
-        <a href="tentang-saya.html" class="btn btn-primary" style="margin-top: 0.5rem;"><i class="fas fa-user"></i> Baca Selengkapnya</a>
-      </div>
     </div>
   </section>
 
@@ -725,32 +778,32 @@
 
   <!-- FAQ SECTION -->
   <section class="section" id="faq">
-    <h2 class="section-title">FAQ</h2>
+    <h2 class="section-title">FAQ / Pertanyaan Umum</h2>
     <div class="faq-container">
       
       <div class="faq-item">
         <button class="faq-question">
-          <span>siapa itu Dimas Julfiansyah?</span>
+          <span>Apa fokus bidang keahlian utama Dimas Julfiansyah?</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="faq-answer">
-          Saya lulusan SMK Teknik Komputer dan Informatika, pemeliharaan perangkat keras (hardware, serta pengembangan web frontend (HTML, CSS, JS, Supabase).
+          Saya berfokus pada Teknik Komputer dan Informatika, pemeliharaan perangkat keras (hardware & mesin cetak digital), operasional industri, serta pengembangan web frontend (HTML, CSS, JS, Supabase).
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">
-          <span>web ini di gunakan untuk apa?</span>
+          <span>Bagaimana cara menghubungi untuk diskusi kerjasama atau pekerjaan?</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="faq-answer">
-          web ini digunakan oleh saya secara personal untuk personal branding.
+          Anda dapat langsung mengisi formulir "Kirim Pesan" di atas atau mengirimkan email langsung ke **dimasjulfiansyah@gmail.com**.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">
-          <span>portofolio skill dan pengalaman apa saja yang sedang di kembangkan?</span>
+          <span>Apakah proyek portofolio yang ditampilkan dapat diverifikasi?</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="faq-answer">
@@ -778,7 +831,7 @@
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
-      alert(`Terima kasih ${name}, pesan Anda berhasil terkirim!.`);
+      alert(`Terima kasih ${name}, pesan Anda berhasil di kirim.`);
       this.reset();
     });
   </script>
