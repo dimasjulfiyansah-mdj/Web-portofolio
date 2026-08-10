@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Branding</title>
+  <title>Personal Branding - Dimas Julfiansyah</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Supabase JS Client (Cloud Database integration) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     /* ==========================================
        1. VARIABEL WARNA & RESET CSS
@@ -60,7 +67,7 @@
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary-cyan);
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     .logo span { color: var(--accent-gold); }
@@ -83,7 +90,7 @@
     }
 
     /* ==========================================
-       3. HERO SECTION (ANIMASI BACKGROUND & FOTO)
+       3. HERO SECTION & ANIMASI
        ========================================== */
     .hero {
       position: relative;
@@ -93,10 +100,9 @@
       justify-content: center;
       background: var(--gradient-ocean);
       overflow: hidden;
-      padding: 6rem 2rem 2rem 2rem;
+      padding: 6rem 2rem 4rem 2rem;
     }
 
-    /* Partikel Latar Belakang Bergerak */
     .hero-bg-overlay {
       position: absolute;
       top: 0;
@@ -131,10 +137,38 @@
     .hero-text p {
       font-size: 1.15rem;
       color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Media Sosial Icons */
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
       margin-bottom: 2rem;
     }
 
-    /* Panggilan Bertindak (CTA Button) */
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-cyan);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .social-icon:hover {
+      background: var(--primary-cyan);
+      color: var(--bg-dark);
+      transform: translateY(-4px);
+    }
+
+    /* Buttons */
     .btn-group {
       display: flex;
       gap: 1rem;
@@ -147,6 +181,8 @@
       text-decoration: none;
       transition: var(--transition-smooth);
       display: inline-block;
+      cursor: pointer;
+      border: none;
     }
 
     .btn-primary {
@@ -163,6 +199,7 @@
     .btn-secondary {
       border: 2px solid var(--accent-gold);
       color: var(--accent-gold);
+      background: transparent;
     }
 
     .btn-secondary:hover {
@@ -171,7 +208,7 @@
       transform: translateY(-3px);
     }
 
-    /* Bingkai Foto Mengapung (Floating Motion) */
+    /* Floating Avatar */
     .hero-image-wrapper {
       position: relative;
       display: flex;
@@ -195,13 +232,13 @@
       border-radius: inherit;
     }
 
-    /* Gelombang Bergerak di Bawah Hero Section */
+    /* Gelombang Parallax SVG */
     .waves {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 120px;
+      height: 100px;
       margin-bottom: -7px;
     }
 
@@ -214,7 +251,7 @@
     .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; fill: var(--bg-dark); }
 
     /* ==========================================
-       4. SEKSI TENTANG SAYA (ABOUT)
+       4. SEKSI UMUM & TENTANG SAYA
        ========================================== */
     .section {
       padding: 6rem 2rem;
@@ -259,7 +296,7 @@
     }
 
     /* ==========================================
-       5. KEAHLIAN & PORTOFOLIO (SKILLS & WORKS)
+       5. PORTOFOLIO & KEAHLIAN
        ========================================== */
     .grid-3 {
       display: grid;
@@ -270,9 +307,10 @@
     .card {
       background: var(--bg-card);
       border-radius: 12px;
-      padding: 2rem;
+      padding: 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
       transition: var(--transition-smooth);
+      cursor: pointer;
     }
 
     .card:hover {
@@ -294,11 +332,15 @@
     }
 
     /* ==========================================
-       6. KONTAK INTERAKTIF
+       6. KONTAK & LIVE MESSAGES DASHBOARD
        ========================================== */
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-form, .messages-dashboard {
       background: var(--bg-card);
       padding: 2.5rem;
       border-radius: 16px;
@@ -306,7 +348,7 @@
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .form-group label {
@@ -331,6 +373,70 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
+    .message-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid var(--primary-cyan);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+
+    .message-card h4 {
+      color: var(--accent-gold);
+      font-size: 0.95rem;
+    }
+
+    .message-card span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .message-card p {
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ==========================================
+       7. MODAL POPUP DETAIL PORTOFOLIO
+       ========================================== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid var(--primary-cyan);
+      max-width: 600px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--primary-cyan);
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -340,7 +446,7 @@
     }
 
     /* ==========================================
-       7. ANIMASI KEYFRAMES
+       8. KEYFRAME ANIMATIONS & RESPONSIVE
        ========================================== */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
@@ -362,13 +468,12 @@
       100% { transform: translate3d(85px, 0, 0); }
     }
 
-    /* RESPONSIVE DESIGN */
     @media (max-width: 768px) {
-      .hero-container, .about-content {
+      .hero-container, .about-content, .contact-container {
         grid-template-columns: 1fr;
         text-align: center;
       }
-      .btn-group {
+      .btn-group, .social-links {
         justify-content: center;
       }
       .avatar-frame {
@@ -376,14 +481,14 @@
         height: 240px;
       }
       .nav-links {
-        display: none; /* Dapat disesuaikan dengan menu burger */
+        display: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGASI -->
+  <!-- NAVIGASI HEADER -->
   <header>
     <nav class="navbar">
       <div class="logo">Dimas<span>Julfiansyah.</span></div>
@@ -396,27 +501,36 @@
     </nav>
   </header>
 
-  <!-- SEKSI HERO / BERANDA -->
+  <!-- HERO / BERANDA -->
   <section id="beranda" class="hero">
     <div class="hero-bg-overlay"></div>
     <div class="hero-container">
       <div class="hero-text">
-        <h1>Halo, Saya <span> Dimas Julfiansyah </span></h1>
-        <p>Berkarya Lewat Teknologi.</p>
+        <h1>Halo, Saya <span>Dimas Julfiansyah</span></h1>
+        <p>Pengembang & Spesialis Teknologi Informasi SMK Teknik Komputer & Informatika.</p>
+        
+        <!-- MEDIA SOSIAL -->
+        <div class="social-links">
+          <a href="mailto:dimasjulfiansyah@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+
         <div class="btn-group">
           <a href="#portofolio" class="btn btn-primary">Lihat Portofolio</a>
           <a href="#kontak" class="btn btn-secondary">Hubungi Saya</a>
         </div>
       </div>
+
       <div class="hero-image-wrapper">
         <div class="avatar-frame">
-          <!-- GANTI FOTO HERO/PROFIL DI SINI -->
-          <img src= "https://i.imgur.com/b0rfoaN.jpeg" alt="Foto Profil Utama" onerror="this.src='https://via.placeholder.com/320x320/0284c7/ffffff?text=Foto+Profil'">
+          <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Foto Profil Dimas Julfiansyah" onerror="this.src='https://via.placeholder.com/320x320/0284c7/ffffff?text=Foto+Profil'">
         </div>
       </div>
     </div>
 
-    <!-- Gelombang Bergerak Dinamis (SVG) -->
+    <!-- GELOMBANG PARALLAX SVG -->
     <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
       <defs>
         <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
@@ -434,20 +548,19 @@
   <section id="tentang" class="section">
     <h2 class="section-title">Tentang Saya</h2>
     <div class="about-content">
-      <!-- GANTI FOTO TENTANG SAYA DI SINI -->
       <img src="https://i.imgur.com/mqLkBMO.jpeg" alt="Foto Tentang Saya" class="about-img" onerror="this.src='https://via.placeholder.com/300x400/0f172a/38bdf8?text=Foto+Tentang+Saya'">
       <div>
-        <h3>Profesional Teknologi IT </h3>
+        <h3>Profesional Teknologi IT & Informatika</h3>
         <p style="margin-top: 1rem; color: var(--text-muted);">
-          Berpengalaman di bidang Teknologi digital yang inovatif.
+          Memiliki minat tinggi dan pengalaman praktis di bidang teknologi digital yang inovatif, pemrograman web, hingga pemeliharaan sistem keras dan perangkat lunak secara profesional.
         </p>
         <div style="margin-top: 1.5rem; display: flex; gap: 2rem;">
           <div>
-            <h4 style="color: var(--accent-gold);">100%</h4>
+            <h4 style="color: var(--accent-gold); font-size: 1.5rem;">100%</h4>
             <p style="font-size: 0.85rem; color: var(--text-muted);">Komitmen Hasil</p>
           </div>
           <div>
-            <h4 style="color: var(--accent-gold);">2+ Tahun</h4>
+            <h4 style="color: var(--accent-gold); font-size: 1.5rem;">2+ Tahun</h4>
             <p style="font-size: 0.85rem; color: var(--text-muted);">Pengalaman Teknis</p>
           </div>
         </div>
@@ -455,400 +568,43 @@
     </div>
   </section>
 
-  <!-- SEKSI KEAHLIAN & PORTOFOLIO -->
-  <section id="portofolio" class="section">
-    <h2 class="section-title">Keahlian & Karya</h2>
-    <div class="grid-3">
-      
-      <div class="card">
-        <!-- GANTI GAMBAR PORTOFOLIO 1 DI SINI -->
-        <img src="https://i.imgur.com/1YnbFSu.jpeg" alt="Proyek 1" class="card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Proyek+1'">
-        <h3>Seorang Progremer di bidang IT</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Teknologi dan inovasi.</p>
-      </div>
-
-      <div class="card">
-        <!-- GANTI GAMBAR PORTOFOLIO 2 DI SINI -->
-        <img src="https://i.imgur.com/zX2z9dL.jpeg" alt="Proyek 2" class="card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Proyek+2'">
-        <h3>Publikasi karya</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Seorang Penulis Publish.</p>
-      </div>
-
-      <div class="card">
-        <!-- GANTI GAMBAR PORTOFOLIO 3 DI SINI -->
-        <img src="https://i.imgur.com/ng99Lki.jpeg" alt="Proyek 3" class="card-img" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Proyek+3'">
-        <h3>Teknik Komputer dan Informatika </h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Pemahaman Di bidang teknologi informasi.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SEKSI KONTAK -->
-  <section id="kontak" class="section">
-    <h2 class="section-title">Hubungi Saya</h2>
-    <form class="contact-form" action="#" method="POST">
-      <div class="form-group">
-        <label for="name">Nama Lengkap</label>
-        <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Alamat Email</label>
-        <input type="email" id="email" class="form-control" placeholder="nama@email.com" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Pesan</label>
-        <textarea id="message" class="form-control" rows="5" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">Kirim Pesan</button>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2026 dimas julfiansyah. Seluruh hak cipta dilindungi.</p>
-  </footer>
-
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Branding - Dimas Julfiansyah</title>
-  
-  <!-- FontAwesome Icon CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Supabase JS Client CDN (Untuk Database Cloud Gratis) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    :root {
-      --bg-dark: #0a192f;
-      --bg-card: rgba(15, 23, 42, 0.75);
-      --primary-cyan: #38bdf8;
-      --accent-gold: #fbbf24;
-      --text-light: #f8fafc;
-      --text-muted: #94a3b8;
-      --gradient-ocean: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);
-      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* NAVIGASI */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(10, 25, 47, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-    }
-
-    .navbar {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary-cyan);
-    }
-    .logo span { color: var(--accent-gold); }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition-smooth);
-    }
-    .nav-links a:hover { color: var(--primary-cyan); }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--gradient-ocean);
-      overflow: hidden;
-      padding: 6rem 2rem 2rem 2rem;
-    }
-
-    .hero-container {
-      max-width: 1200px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
-      z-index: 2;
-    }
-
-    .hero-text h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 1rem; }
-    .hero-text h1 span { color: var(--primary-cyan); }
-    .hero-text p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-
-    /* MEDIA SOSIAL */
-    .social-links {
-      display: flex;
-      gap: 1.2rem;
-      margin-bottom: 2rem;
-    }
-
-    .social-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary-cyan);
-      font-size: 1.2rem;
-      text-decoration: none;
-      transition: var(--transition-smooth);
-    }
-
-    .social-icon:hover {
-      background: var(--primary-cyan);
-      color: var(--bg-dark);
-      transform: translateY(-4px);
-    }
-
-    /* BUTTONS */
-    .btn-group { display: flex; gap: 1rem; }
-    .btn {
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition-smooth);
-      display: inline-block;
-      cursor: pointer;
-    }
-    .btn-primary { background: var(--primary-cyan); color: var(--bg-dark); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(56, 189, 248, 0.6); }
-    .btn-secondary { border: 2px solid var(--accent-gold); color: var(--accent-gold); }
-    .btn-secondary:hover { background: var(--accent-gold); color: var(--bg-dark); transform: translateY(-3px); }
-
-    .avatar-frame {
-      width: 320px;
-      height: 320px;
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--accent-gold));
-      padding: 6px;
-      animation: float 6s ease-in-out infinite;
-    }
-    .avatar-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
-
-    /* SECTION GENERAL */
-    .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
-    .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 3rem; }
-    .section-title::after {
-      content: ''; display: block; width: 60px; height: 4px;
-      background: var(--primary-cyan); margin: 0.5rem auto 0; border-radius: 2px;
-    }
-
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .card {
-      background: var(--bg-card);
-      border-radius: 12px;
-      padding: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: var(--transition-smooth);
-      cursor: pointer;
-    }
-    .card:hover { transform: translateY(-8px); border-color: var(--primary-cyan); }
-    .card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; }
-    .card h3 { color: var(--accent-gold); margin-bottom: 0.5rem; }
-
-    /* FORM & MESSAGES BOARD */
-    .contact-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .contact-form, .messages-dashboard {
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-light); }
-    .form-control {
-      width: 100%; padding: 0.8rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px; color: var(--text-light); outline: none;
-    }
-    .form-control:focus { border-color: var(--primary-cyan); }
-
-    .message-card {
-      background: rgba(255, 255, 255, 0.03);
-      border-left: 3px solid var(--primary-cyan);
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 4px;
-    }
-    .message-card h4 { color: var(--accent-gold); font-size: 0.95rem; }
-    .message-card span { font-size: 0.75rem; color: var(--text-muted); }
-    .message-card p { font-size: 0.85rem; margin-top: 0.3rem; }
-
-    /* MODAL POPUP FOR PORTFOLIO DETAILS */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-    }
-    .modal-content {
-      background: #0f172a;
-      border: 1px solid var(--primary-cyan);
-      max-width: 600px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 2rem;
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      top: 1rem; right: 1.5rem;
-      font-size: 1.8rem;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-    .modal-close:hover { color: var(--primary-cyan); }
-
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-    @media (max-width: 768px) {
-      .hero-container, .contact-container { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- NAVIGASI -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">Dimas<span>Julfiansyah.</span></div>
-      <ul class="nav-links">
-        <li><a href="#beranda">Beranda</a></li>
-        <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#portofolio">Keahlian & Karya</a></li>
-        <li><a href="#kontak">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section id="beranda" class="hero">
-    <div class="hero-container">
-      <div class="hero-text">
-        <h1>Halo, Saya <span>Dimas Julfiansyah</span></h1>
-        <p>Pengembang & Spesialis Teknologi Informasi SMK Teknik Komputer & Informatika.</p>
-        
-        <!-- IKON MEDIA SOSIAL & KONTAK -->
-        <div class="social-links">
-          <a href="mailto:dimasjulfiansyah@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
-          <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://linkedin.com" target="_blank" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com" target="_blank" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
-        </div>
-
-        <div class="btn-group">
-          <a href="#portofolio" class="btn btn-primary">Lihat Portofolio</a>
-          <a href="#kontak" class="btn btn-secondary">Hubungi Saya</a>
-        </div>
-      </div>
-      <div class="hero-image-wrapper">
-        <div class="avatar-frame">
-          <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Foto Profil" onerror="this.src='https://via.placeholder.com/320'">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTOFOLIO SECTION -->
+  <!-- SEKSI PORTOFOLIO & KEAHLIAN -->
   <section id="portofolio" class="section">
     <h2 class="section-title">Keahlian & Karya</h2>
     <div class="grid-3">
       
       <!-- CARD 1 -->
       <div class="card" onclick="openModal(1)">
-        <img src="https://i.imgur.com/1YnbFSu.jpeg" class="card-img" alt="Proyek 1">
+        <img src="https://i.imgur.com/1YnbFSu.jpeg" class="card-img" alt="Proyek 1 - Programmer" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Proyek+1'">
         <h3>Programmer & Developer IT</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Klik untuk membuka dashboard detail proyek & stack teknologi.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Klik untuk melihat detail stack teknologi dan pengembangan aplikasi.</p>
       </div>
 
       <!-- CARD 2 -->
       <div class="card" onclick="openModal(2)">
-        <img src="https://i.imgur.com/zX2z9dL.jpeg" class="card-img" alt="Proyek 2">
+        <img src="https://i.imgur.com/zX2z9dL.jpeg" class="card-img" alt="Proyek 2 - Publikasi Karya" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Proyek+2'">
         <h3>Publikasi Karya & Penulisan</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Klik untuk melihat dokumentasi karya dan publikasi tulisan.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Klik untuk melihat dokumentasi penulisan teknis dan publikasi.</p>
       </div>
 
       <!-- CARD 3 -->
       <div class="card" onclick="openModal(3)">
-        <img src="https://i.imgur.com/ng99Lki.jpeg" class="card-img" alt="Proyek 3">
-        <h3>Teknik Komputer & Jaringan</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Klik untuk melihat detail perakitan sistem & pemeliharaan hardware.</p>
+        <img src="https://i.imgur.com/ng99Lki.jpeg" class="card-img" alt="Proyek 3 - Teknik Komputer" onerror="this.src='https://via.placeholder.com/400x250/0284c7/ffffff?text=Proyek+3'">
+        <h3>Teknik Komputer & Informatika</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Klik untuk melihat pemeliharaan hardware, jaringan, dan cetak digital.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- KONTAK & LIVE MESSAGES DASHBOARD -->
+  <!-- SEKSI KONTAK & LIVE MESSAGES BOARD -->
   <section id="kontak" class="section">
     <h2 class="section-title">Hubungi Saya & Live Message Board</h2>
     <div class="contact-container">
       
-      <!-- FORM KIRIM PESAN CLOUD API -->
+      <!-- FORM KIRIM PESAN -->
       <form class="contact-form" id="contactForm">
-        <h3 style="margin-bottom:1rem; color:var(--primary-cyan);">Kirim Pesan</h3>
-        
-        <!-- API Access Key dari Web3Forms (Ganti dengan Key Anda jika ingin masuk ke email) -->
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-
+        <h3 style="margin-bottom: 1rem; color: var(--primary-cyan);">Kirim Pesan</h3>
         <div class="form-group">
           <label for="name">Nama Lengkap</label>
           <input type="text" id="name" name="name" class="form-control" placeholder="Masukkan nama Anda" required>
@@ -861,14 +617,14 @@
           <label for="message">Pesan</label>
           <textarea id="message" name="message" class="form-control" rows="4" placeholder="Tuliskan pesan..." required></textarea>
         </div>
-        <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; border: none;">Kirim Pesan</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">Kirim Pesan</button>
       </form>
 
       <!-- DASBOR PESAN MASUK -->
       <div class="messages-dashboard">
-        <h3 style="margin-bottom:1rem; color:var(--accent-gold);"><i class="fas fa-cloud"></i> Live Messages (Cloud Board)</h3>
+        <h3 style="margin-bottom: 1rem; color: var(--accent-gold);"><i class="fas fa-cloud"></i> Live Messages (Cloud Board)</h3>
         <div id="messagesList" style="max-height: 320px; overflow-y: auto;">
-          <p style="color: var(--text-muted);">Memuat pesan dari Cloud...</p>
+          <p style="color: var(--text-muted);">Memuat pesan tersimpan...</p>
         </div>
       </div>
 
@@ -876,31 +632,32 @@
   </section>
 
   <!-- MODAL DETAIL PORTOFOLIO -->
-  <div class="modal" id="portfolioModal">
+  <div class="modal" id="portfolioModal" onclick="closeModalOnBackdrop(event)">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal()">&times;</span>
       <h3 id="modalTitle" style="color: var(--primary-cyan); margin-bottom: 0.5rem;">Detail Portofolio</h3>
       <p id="modalCategory" style="color: var(--accent-gold); font-weight: 600; margin-bottom: 1rem;"></p>
-      <img id="modalImg" src="" alt="Detail Preview" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+      <img id="modalImg" src="" alt="Preview Portofolio" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
       <p id="modalDesc" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;"></p>
       <button class="btn btn-secondary" onclick="closeModal()">Tutup Detail</button>
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 Dimas Julfiansyah. Seluruh hak cipta dilindungi.</p>
   </footer>
 
+  <!-- JAVASCRIPT LOGIC -->
   <script>
     // -------------------------------------------------------------
-    // CONFIGURASI DATABASE CLOUD (SUPABASE)
+    // SETUP SUPABASE DATABASE (OPSIONAL)
     // -------------------------------------------------------------
     const SUPABASE_URL = "https://YOUR_SUPABASE_PROJECT_ID.supabase.co"; 
     const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY"; 
     
-    // Inisialisasi Supabase (jika diisi key-nya)
     let supabase = null;
-    if (SUPABASE_URL.includes("supabase.co")) {
+    if (SUPABASE_URL.includes("supabase.co") && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
@@ -912,7 +669,7 @@
         title: "Programmer & Developer IT",
         category: "Pengembangan Perangkat Lunak & Web",
         img: "https://i.imgur.com/1YnbFSu.jpeg",
-        desc: "Menguasai dasar-dasar pemrograman web dinamis berbasis HTML5, CSS3, JavaScript ES6, serta pengembangan UI/UX yang responsif dan interaktif."
+        desc: "Menguasai dasar-dasar pemrograman web dinamis berbasis HTML5, CSS3, JavaScript ES6, serta pengembangan antarmuka UI/UX yang responsif dan interaktif."
       },
       2: {
         title: "Publikasi Karya & Penulisan",
@@ -921,7 +678,7 @@
         desc: "Pengalaman menyusun dokumentasi teknis, penulisan artikel seputar tren teknologi, serta penyusunan materi publikasi ilmiah dan edukasi digital secara profesional."
       },
       3: {
-        title: "Teknik Komputer & Jaringan",
+        title: "Teknik Komputer & Informatika",
         category: "Hardware, Network & System Maintenance",
         img: "https://i.imgur.com/ng99Lki.jpeg",
         desc: "Memiliki pemahaman mendalam pada perakitan komputer, troubleshooting perangkat keras, instalasi jaringan LAN/WAN, serta pemeliharaan mesin cetak digital dan perangkat IT industri."
@@ -930,6 +687,7 @@
 
     function openModal(id) {
       const data = portfolioData[id];
+      if (!data) return;
       document.getElementById('modalTitle').innerText = data.title;
       document.getElementById('modalCategory').innerText = data.category;
       document.getElementById('modalImg').src = data.img;
@@ -941,21 +699,32 @@
       document.getElementById('portfolioModal').style.display = 'none';
     }
 
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'portfolioModal') {
+        closeModal();
+      }
+    }
+
     // -------------------------------------------------------------
-    // LOAD MESSAGES (Dari Supabase / LocalStorage fallback)
+    // MANAGEMENT PESAN (Cloud / LocalStorage Fallback)
     // -------------------------------------------------------------
     async function loadMessages() {
       const container = document.getElementById('messagesList');
       
+      // Jika Supabase Aktif
       if (supabase) {
-        const { data, error } = await supabase.from('pesan_masuk').select('*').order('created_at', { ascending: false }).limit(10);
-        if (!error && data.length > 0) {
-          renderMessages(data);
-          return;
+        try {
+          const { data, error } = await supabase.from('pesan_masuk').select('*').order('created_at', { ascending: false }).limit(10);
+          if (!error && data && data.length > 0) {
+            renderMessages(data);
+            return;
+          }
+        } catch (err) {
+          console.log("Supabase error/not configured, switching to LocalStorage fallback.");
         }
       }
       
-      // Fallback LocalStorage jika Supabase belum disetup
+      // Fallback ke LocalStorage
       const localData = JSON.parse(localStorage.getItem('messages_board') || '[]');
       if (localData.length > 0) {
         renderMessages(localData);
@@ -975,47 +744,45 @@
       `).join('');
     }
 
-    // -------------------------------------------------------------
-    // SUBMIT FORM (Tanpa Backend PHP - Langsung Kirim Cloud)
-    // -------------------------------------------------------------
+    // Handle Form Submit
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const submitBtn = document.getElementById('submitBtn');
       submitBtn.innerText = 'Sending...';
 
-      const nama = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const pesan = document.getElementById('message').value;
+      const nameVal = document.getElementById('name').value.trim();
+      const emailVal = document.getElementById('email').value.trim();
+      const messageVal = document.getElementById('message').value.trim();
 
-      // 1. Simpan ke Supabase jika aktif
+      const newMsg = {
+        name: nameVal,
+        email: emailVal,
+        message: messageVal,
+        created_at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      // Simpan ke Supabase jika aktif
       if (supabase) {
-        await supabase.from('pesan_masuk').insert([{ nama, email, pesan }]);
-      } else {
-        // Fallback simpan ke LocalStorage agar pesan langsung tampil di browser
-        const currentMsgs = JSON.parse(localStorage.getItem('messages_board') || '[]');
-        currentMsgs.unshift({ name: nama, email, message: pesan, created_at: new Date().toLocaleTimeString() });
-        localStorage.setItem('messages_board', JSON.stringify(currentMsgs));
+        try {
+          await supabase.from('pesan_masuk').insert([{ nama: nameVal, email: emailVal, pesan: messageVal }]);
+        } catch (err) {
+          console.error(err);
+        }
       }
 
-      // 2. Kirim email via Web3Forms API
-      const formData = new FormData(this);
-      try {
-        await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: formData
-        });
-        alert('Pesan berhasil dikirim!');
-      } catch (err) {
-        alert('Pesan telah dicatat di Live Board!');
-      }
+      // Selalu simpan ke LocalStorage agar dashboard langsung terupdate
+      const localData = JSON.parse(localStorage.getItem('messages_board') || '[]');
+      localData.unshift(newMsg);
+      localStorage.setItem('messages_board', JSON.stringify(localData));
 
+      // Reset Form & Update Tampilan
       this.reset();
       submitBtn.innerText = 'Kirim Pesan';
       loadMessages();
     });
 
-    // Load pesan saat halaman dibuka
-    loadMessages();
+    // Inisialisasi Pesan saat Halaman Dimuat
+    document.addEventListener('DOMContentLoaded', loadMessages);
   </script>
 </body>
 </html>
