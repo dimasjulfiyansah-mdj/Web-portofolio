@@ -54,7 +54,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
 
     .logo {
@@ -66,6 +72,72 @@
     }
 
     .logo span { color: var(--accent-gold); }
+
+    /* DROPDOWN MENU DASHBOARD PORTOFOLIO DI KIRI */
+    .portfolio-dashboard-dropdown {
+      position: relative;
+    }
+
+    .dashboard-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--primary-cyan);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .dashboard-btn:hover {
+      background: var(--primary-cyan);
+      color: var(--bg-dark);
+    }
+
+    .portfolio-dashboard-dropdown .dropdown-menu {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      min-width: 220px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .portfolio-dashboard-dropdown .dropdown-menu a {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .portfolio-dashboard-dropdown .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .portfolio-dashboard-dropdown .dropdown-menu a:hover {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-gold);
+    }
+
+    .portfolio-dashboard-dropdown:hover .dropdown-menu {
+      display: flex;
+    }
 
     .nav-links {
       display: flex;
@@ -83,64 +155,6 @@
 
     .nav-links a:hover, .nav-links a.active {
       color: var(--primary-cyan);
-    }
-
-    /* DROPDOWN MENU FOR PORTOFOLIO */
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: var(--transition-smooth);
-      padding: 0.5rem 0;
-    }
-
-    .dropdown-btn:hover {
-      color: var(--primary-cyan);
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: 12px;
-      min-width: 200px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 100;
-    }
-
-    .dropdown-menu a {
-      padding: 0.8rem 1.2rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.9rem;
-    }
-
-    .dropdown-menu a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(56, 189, 248, 0.1);
-      color: var(--accent-gold);
-    }
-
-    .dropdown:hover .dropdown-menu {
-      display: flex;
     }
 
     /* HERO SECTION */
@@ -201,7 +215,6 @@
       margin-bottom: 2rem;
       font-style: italic;
       color: var(--text-light);
-      position: relative;
     }
 
     .hero-quote i {
@@ -284,43 +297,29 @@
       transform: translateY(-3px);
     }
 
-    /* FOTO POP-OUT BULAT BERGERAK */
+    /* FOTO STANDAR ELEGAN BERGERAK (FLOAT) */
     .hero-image-wrapper {
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .popout-avatar-container {
-      position: relative;
-      width: 320px;
-      height: 320px;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .popout-circle-bg {
-      position: absolute;
-      bottom: 0;
+    .avatar-frame {
       width: 320px;
       height: 320px;
       border-radius: 50%;
+      padding: 8px;
       background: linear-gradient(135deg, var(--primary-cyan), var(--accent-gold));
-      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.3);
-      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+      animation: float 5s ease-in-out infinite;
     }
 
-    .popout-avatar-img {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 310px;
-      height: auto;
-      max-height: 380px;
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
       object-fit: cover;
-      pointer-events: none;
-      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+      border: 4px solid var(--bg-dark);
     }
 
     /* SECTIONS COMMON */
@@ -345,6 +344,56 @@
       background: var(--primary-cyan);
       margin: 0.5rem auto 0;
       border-radius: 2px;
+    }
+
+    /* PORTOFOLIO GRID SECTION */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition-smooth);
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary-cyan);
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+    }
+
+    .portfolio-card i {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .portfolio-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .portfolio-card a {
+      color: var(--primary-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .portfolio-card a:hover {
+      text-decoration: underline;
     }
 
     /* TENTANG SAYA SECTION */
@@ -472,7 +521,6 @@
       color: var(--accent-gold);
     }
 
-    /* STATEMENTS & PERSETUJUAN */
     .statement-box {
       margin-top: 2rem;
       background: rgba(56, 189, 248, 0.05);
@@ -505,7 +553,7 @@
 
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-12px); }
     }
 
     @keyframes pulseGlow {
@@ -532,26 +580,28 @@
   <!-- NAVIGASI HEADER -->
   <header>
     <nav class="navbar">
-      <a href="index.html" class="logo">Dimas<span>Julfiansyah.</span></a>
+      <div class="nav-left-group">
+        <a href="index.html" class="logo">Dimas<span>Julfiansyah.</span></a>
+        
+        <!-- DASHBOARD MENU PORTOFOLIO DI KIRI ATAS -->
+        <div class="portfolio-dashboard-dropdown">
+          <button class="dashboard-btn">
+            <i class="fas fa-th-large"></i> Portofolio <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="portofolio-1.html"><i class="fas fa-code"></i> (Web Dev)</a>
+            <a href="portofolio-2.html"><i class="fas fa-pen-nib"></i> (Publikasi)</a>
+            <a href="portofolio-3.html"><i class="fas fa-microchip"></i> (Hardware)</a>
+            <a href="portofolio-4.html"><i class="fas fa-tools"></i> (Skill)</a>
+          </div>
+        </div>
+      </div>
+
       <ul class="nav-links">
         <li><a href="index.html" class="active">Beranda</a></li>
         <li><a href="tentang-saya.html">Tentang Saya</a></li>
-        
-        <!-- DROPDOWN SATU TOMBOL PORTOFOLIO -->
-        <li class="dropdown">
-          <button class="dropdown-btn">
-            Portofolio & Pengalaman <i class="fas fa-chevron-down" style="font-size: 0.8rem;"></i>
-          </button>
-          <div class="dropdown-menu">
-            <a href="portofolio-1.html"><i class="fas fa-code"></i> Portofolio 1 (Web Dev)</a>
-            <a href="portofolio-2.html"><i class="fas fa-pen-nib"></i> Portofolio 2 (Publikasi)</a>
-            <a href="portofolio-3.html"><i class="fas fa-microchip"></i> Portofolio 3 (Hardware)</a>
-            <a href="portofolio-4.html"><i class="fas fa-tools"></i> Portofolio 4 (Skill)</a>
-            <a href="pengalaman.html"><i class="fas fa-history"></i> Pengalaman Kerja</a>
-          </div>
-        </li>
-
         <li><a href="perpustakaan.html">Perpustakaan Digital</a></li>
+        <li><a href="pengalaman.html">Tentang Saya</a></li>
       </ul>
     </nav>
   </header>
@@ -562,9 +612,9 @@
     <div class="hero-container">
       <div class="hero-text">
         <h1>Halo, Saya <span>Dimas Julfiansyah</span></h1>
-        <p> Pengembangan Web Personal.</p>
+        <p> Operasional IT, & Pengembangan Web .</p>
         
-        <!-- KATA-KATA BIJAK / QUOTES -->
+        <!-- QUOTES / KATA-KATA BIJAK -->
         <div class="hero-quote">
           <i class="fas fa-quote-left"></i>
           "Teknologi terbaik bukan hanya tentang seberapa canggih sistem dibuat, tetapi seberapa besar nilai dan kemudahan yang dihadirkan untuk banyak orang."
@@ -584,24 +634,59 @@
         </div>
       </div>
 
-      <!-- FOTO POP-OUT BULAT BERGERAK -->
+      <!-- FOTO STANDAR ELEGAN BERGERAK -->
       <div class="hero-image-wrapper">
-        <div class="popout-avatar-container">
-          <div class="popout-circle-bg"></div>
-          <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Foto Dimas Julfiansyah" class="popout-avatar-img" onerror="this.src='https://via.placeholder.com/320x380/0284c7/ffffff?text=Dimas+Julfiansyah'">
+        <div class="avatar-frame">
+          <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Dimas Julfiansyah" class="avatar-img" onerror="this.src='https://via.placeholder.com/320x320/0284c7/ffffff?text=Dimas+Julfiansyah'">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TENTANG SAYA SECTION (PROFIL HALAMAN UTAMA) -->
+  <!-- PORTOFOLIO UTAMA SECTION -->
+  <section class="section" id="portofolio">
+    <h2 class="section-title">Bidang Portofolio Utama</h2>
+    <div class="portfolio-grid">
+      
+      <div class="portfolio-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Teknik Komputer & Informatika</h3>
+        <p>Pengembangan sistem web modern, *troubleshooting* software, dan pengelolaan infrastruktur IT dasar.</p>
+        <a href="portofolio-1.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="portfolio-card">
+        <i class="fas fa-newspaper"></i>
+        <h3>Publikasi & Dokumen</h3>
+        <p>Pengelolaan dokumen teknis, publikasi karya cetak digital, serta penyusunan panduan operasional.</p>
+        <a href="portofolio-2.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="portfolio-card">
+        <i class="fas fa-print"></i>
+        <h3>Teknik komputer dan informatika</h3>
+        <p>Pembuatan website yang terupdate</p>
+        <a href="portofolio-3.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="portfolio-card">
+        <i class="fas fa-user-check"></i>
+        <h3>Pengalaman & Skill</h3>
+        <p> pengalaman kerja di dunia digital printing.</p>
+        <a href="portofolio-4.html">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TENTANG SAYA SECTION -->
   <section class="section" id="tentang">
     <h2 class="section-title">Profil Tentang Saya</h2>
     <div class="about-card">
       <img src="https://i.imgur.com/b0rfoaN.jpeg" alt="Dimas Julfiansyah" class="about-img" onerror="this.src='https://via.placeholder.com/300x300/0284c7/ffffff?text=Profil'">
       <div class="about-info">
         <h3>Dimas Julfiansyah</h3>
-        <p>Saya adalah lulusan Teknik Komputer dan Informatika yang memiliki minat tinggi di bidang It, pemeliharaan *hardware*, serta pengembangan perangkat lunak modern.</p>
+        <p>Saya adalah lulusan Teknik Komputer dan Informatika yang memiliki minat tinggi di bidang operasional industri, pemeliharaan *hardware*, serta pengembangan perangkat lunak modern.</p>
         <p>Dengan latar belakang teknis yang kuat, saya terbiasa menangani *troubleshooting* jaringan, perawatan mesin cetak digital, serta membangun antarmuka web yang responsif dan interaktif.</p>
         <a href="tentang-saya.html" class="btn btn-primary" style="margin-top: 0.5rem;"><i class="fas fa-user"></i> Baca Selengkapnya</a>
       </div>
@@ -626,11 +711,10 @@
           <textarea id="message" class="form-control" placeholder="Tuliskan pesan atau penawaran kerjasama di sini..." required></textarea>
         </div>
         
-        <!-- PERNYATAAN / PERSETUJUAN -->
         <div class="statement-box form-group">
           <label class="statement-checkbox">
             <input type="checkbox" id="agreeStatement" required>
-            <span>Saya menyatakan bahwa informasi dan pesan yang dikirimkan adalah benar serta ditujukan untuk komunikasi profesional.</span>
+            <span>Saya menyatakan bahwa informasi dan pesan yang dikirimkan adalah benar.</span>
           </label>
         </div>
 
@@ -641,32 +725,32 @@
 
   <!-- FAQ SECTION -->
   <section class="section" id="faq">
-    <h2 class="section-title">FAQ / Pertanyaan Umum</h2>
+    <h2 class="section-title">FAQ</h2>
     <div class="faq-container">
       
       <div class="faq-item">
         <button class="faq-question">
-          <span>Apa fokus bidang keahlian utama Dimas Julfiansyah?</span>
+          <span>siapa itu Dimas Julfiansyah?</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="faq-answer">
-          Saya berfokus pada Teknik Komputer dan Informatika, pemeliharaan perangkat keras (hardware & mesin cetak digital), operasional industri, serta pengembangan web frontend (HTML, CSS, JS, Supabase).
+          Saya lulusan SMK Teknik Komputer dan Informatika, pemeliharaan perangkat keras (hardware, serta pengembangan web frontend (HTML, CSS, JS, Supabase).
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">
-          <span>Bagaimana cara menghubungi untuk diskusi kerjasama atau pekerjaan?</span>
+          <span>web ini di gunakan untuk apa?</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="faq-answer">
-          Anda dapat langsung mengisi formulir "Kirim Pesan" di atas atau mengirimkan email langsung ke **dimasjulfiansyah@gmail.com**.
+          web ini digunakan oleh saya secara personal untuk personal branding.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">
-          <span>Apakah proyek portofolio yang ditampilkan dapat diverifikasi?</span>
+          <span>portofolio skill dan pengalaman apa saja yang sedang di kembangkan?</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="faq-answer">
@@ -681,7 +765,6 @@
     <p>&copy; 2026 Dimas Julfiansyah. Seluruh hak cipta dilindungi.</p>
   </footer>
 
-  <!-- SCRIPT FOR FAQ & FORM SUBMISSION -->
   <script>
     // FAQ Accordion Toggle
     document.querySelectorAll('.faq-question').forEach(button => {
@@ -695,7 +778,7 @@
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
-      alert(`Terima kasih ${name}, pesan Anda berhasil terkirim! Saya akan merespons secepatnya.`);
+      alert(`Terima kasih ${name}, pesan Anda berhasil terkirim!.`);
       this.reset();
     });
   </script>
