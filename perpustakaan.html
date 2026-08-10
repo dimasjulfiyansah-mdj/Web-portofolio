@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perpustakaan Digital - Dimas Julfiansyah</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a192f; color: #f8fafc; }
+    
+    header { position: fixed; top: 0; width: 100%; background: rgba(10, 25, 47, 0.9); padding: 1.2rem 2rem; border-bottom: 1px solid rgba(56, 189, 248, 0.1); }
+    .navbar { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: #38bdf8; text-decoration: none; }
+    .logo span { color: #fbbf24; }
+    .nav-links { display: flex; list-style: none; gap: 1.5rem; }
+    .nav-links a { color: #f8fafc; text-decoration: none; font-weight: 500; }
+    .nav-links a:hover, .nav-links a.active { color: #38bdf8; }
+
+    .container { max-width: 1000px; margin: 8rem auto 4rem auto; padding: 0 2rem; }
+    .grid-books { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .book-card { background: rgba(15, 23, 42, 0.75); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
+    .book-card h3 { color: #fbbf24; margin-bottom: 0.5rem; }
+    .book-card p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
+    .btn-download { display: inline-block; padding: 0.5rem 1rem; background: #38bdf8; color: #0a192f; text-decoration: none; font-weight: 600; border-radius: 6px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">Dimas<span>Julfiansyah.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="tentang-saya.html">Tentang Saya</a></li>
+        <li><a href="portofolio-1.html">Portofolio 1</a></li>
+        <li><a href="portofolio-2.html">Portofolio 2</a></li>
+        <li><a href="portofolio-3.html">Portofolio 3</a></li>
+        <li><a href="perpustakaan.html" class="active">Perpustakaan Digital</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 style="text-align: center; color: #38bdf8; margin-bottom: 2rem;"><i class="fas fa-book"></i> Perpustakaan Digital</h1>
+    
+    <div class="grid-books">
+      <div class="book-card">
+        <i class="fas fa-file-code" style="font-size: 2rem; color: #fbbf24; margin-bottom: 1rem;"></i>
+        <h3>Panduan Dasar Web Development</h3>
+        <p>E-book pengenalan dasar HTML5, CSS3, dan konsep dasar antarmuka web modern.</p>
+        <a href="#" class="btn-download"><i class="fas fa-download"></i> Unduh E-Book</a>
+      </div>
+
+      <div class="book-card">
+        <i class="fas fa-network-wired" style="font-size: 2rem; color: #fbbf24; margin-bottom: 1rem;"></i>
+        <h3>Modul Troubleshooting Jaringan</h3>
+        <p>Kumpulan solusi teknis dalam menangani kendala konektivitas LAN dan konfigurasi router.</p>
+        <a href="#" class="btn-download"><i class="fas fa-download"></i> Unduh E-Book</a>
+      </div>
+
+      <div class="book-card">
+        <i class="fas fa-print" style="font-size: 2rem; color: #fbbf24; margin-bottom: 1rem;"></i>
+        <h3>Panduan Perawatan Mesin Cetak</h3>
+        <p>Dokumentasi pemeliharaan hardware printer digital dan penanganan error sparepart.</p>
+        <a href="#" class="btn-download"><i class="fas fa-download"></i> Unduh E-Book</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
